@@ -1,0 +1,17 @@
+{
+   "background_page": "background.html",
+   "browser_action": {
+      "default_icon": "images/graph_your_inbox_19.png",
+      "popup": "popup.html"
+   },
+   "description": "Visualize your Gmail data.",
+   "icons": {
+      "128": "images/graph_your_inbox_128.png",
+      "48": "images/graph_your_inbox_48.png"
+   },
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDxjyV2/C1IyVPVDEod61fgy4k+Xm8Lf9lNyGYyDUW1+l3zCOrmGJ+S4bEW/LRqIB/ANnL1E0L7J0XFH22dRmnXfus62Ao/I+cue2VFeqe6FmzwDPTBi8sOUBJb1Xi12eYFfhv6vQXJGnzO2v8ZjHTtPQ7MSllkOt9YVAImtRapPQIDAQAB",
+   "name": "Graph Your Inbox",
+   "permissions": [ "https://mail.google.com/", "http://www.google.com/ig" ],
+   "update_url": "http://clients2.google.com/service/update2/crx",
+   "version": "1.0.1"
+}

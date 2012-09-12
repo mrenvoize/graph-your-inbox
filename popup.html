@@ -1,0 +1,335 @@
+<html>
+<head>
+<style>
+
+body {
+  margin: 0px;
+  font-family: "Trebuchet MS";
+  color: #616161;
+  min-width: 800px;
+  min-height: 600px;
+  overflow-x:hidden;
+}
+
+img {
+  margin:5px;
+  border:2px solid black;
+  vertical-align:middle;
+  width:75px;
+  height:75px;
+}
+
+div#search {
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #b2b2b2;
+  width: 300px;
+  height: 30px;
+  float:left;
+  margin-right: 10px;
+}
+
+div#search input[type="text"] {
+  width: 200px;
+  border: none;
+  vertical-align: middle;
+  height: 100%;
+  font-family: "Trebuchet MS";
+}
+
+div#search input:focus {
+  outline-width:0;
+}
+
+#query_holder {
+  float: left;
+  margin-left: 10px;
+  width: 200px;
+}
+
+div#search_btn {
+  float: right;
+  /*
+  background-color: #616161;
+  border-radius: 6px;
+  */
+}
+
+div#search_btn input {
+  border: 1px solid #616161; 
+  background-color: #616161; 
+  float: right;
+  color: #fff;
+  margin-right: 5px;
+  margin-top: 4px;
+  vertical-align: middle;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  height: 22px;  
+  font-weight: bold;
+  font-family: "Trebuchet MS"
+}
+
+#processing_msg {
+  min-height: 30px;
+  background-color: #fdf7cf;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  border: 1px solid #e3deba;
+  vertical-align: middle;
+  line-height: 30px;
+  color: #616161;
+  font-style: italic;
+  padding-left: 8px;
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+
+
+.graph_title {
+  font-weight: bold;
+  font-family: "Trebuchet MS";
+  font-size: 11pt;  
+  color: #616161;
+}
+
+.graph {
+
+}
+
+#year_month_graph {
+  margin-left: -55px;
+  
+}
+
+#year_graph {
+  margin-left: -20px;
+  overflow-x:hidden;
+}
+
+#day_of_week_graph {
+  margin-left: -20px;
+}
+
+#month_graph {
+  margin-left: -30px;
+}
+
+#graph_tbl {
+   
+}
+
+#graph_tbl > tbody > tr > td {
+  background-image: url(images/td_bg.png);
+  background-repeat: repeat-x;
+  padding: 4px 0px 5px 10px;
+  vertical-align: top;
+}
+
+#query_div_holder {
+  padding-left: 15px;
+  padding-top: 15px;
+  width: 750px;
+}
+
+.clear {
+  clear: both;
+}
+
+.query_item {
+  float:left;
+  border: 1px solid #b2b2b2;
+  border-radius: 6px;
+  -moz-border-radius: 6px;  
+  color: #616161;
+  padding: 3px 2px 1px 3px;
+  font-size: 13px;  
+  margin-right: 7px;
+  margin-bottom: 7px;
+}
+
+.query_x {
+  width: 7px;
+  height: 6px;
+  min-width: 7px;
+  border: none;
+  margin-top: 3px;
+  /*background-image: url(images/x.png);*/
+  background-repeat: none;
+  
+}
+
+.query_x:hover {
+  cursor: hand; 
+}
+
+.ball {
+  width: 10px;
+  height: 10px;
+  border: none;
+  margin-top: 3px;
+}
+
+.processing_msgs {
+  width: 300px;
+}
+
+
+.status {
+  min-height: 30px;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  border: 1px solid #e3deba;
+  vertical-align: middle;
+  line-height: 30px;
+  color: #616161;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-bottom: 7px;
+  float:left;
+}
+
+.good {
+  background-color: #e5ffd1;
+}
+
+.bad {
+  background-color: #ffd1d1;
+}
+
+#emails_holder tr:nth-child(even) {
+  background-color: #fff;
+}
+
+#emails_holder tr:nth-child(odd) {
+  background-color: #edf0f9;
+}
+
+#emails_holder td {
+  font-size: 13px;
+}
+
+#emails_holder tr {
+  font-size: 13px;
+  cursor: hand;
+}
+
+#emails_holder table {
+  margin-top: 10px;
+}
+
+#no_emails_msg {
+  padding: 30px;
+}
+
+#intro {
+  width: 800px;
+  height: 400px;
+  text-align: center;
+   
+}
+
+#intro h2 {
+  font-size: 40px;
+  font-weight: normal;
+  background-image: url('images/graph_your_inbox_128.png');
+  background-repeat: no-repeat;
+  margin-left: 150px;
+  line-height: 128px;
+  padding-top: 18px;
+  cursor: hand;
+}
+
+.example {
+  font-family: "Courier New" Courier monospace; 
+}
+
+</style>
+
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+
+<script type="text/javascript" src="js/popup.min.js"></script>
+
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+google.load("visualization", "1", {packages:["corechart"]});
+</script>
+</head>
+<body>
+
+<div id="query_div_holder">
+<form id="query_form">
+  <div id="search">
+    <div id="query_holder">
+      <input type="text" id="query"/>
+    </div>
+    <div id="search_btn">
+      <input type="submit" value="Search!"/>
+    </div>
+  </div>
+  <div class="status good"></div>
+</form>
+<br class="clear"/>
+
+<div id="processing_msgs"></div>
+  
+<div id="query_items"></div>
+
+<br class="clear"/>
+
+</div>
+
+<div id="intro">
+
+<h2>Graph Your Inbox</h2>
+
+Search for email conversations above.<br/><br/>
+
+<div style="text-align: left; padding-left: 75px">
+Examples to get you started: <br/>
+<ul>
+<li><span class="example">from:facebook</span></li>
+<li><span class="example">amazon</span></li>
+<li><span class="example">to:some_email_address</span> or <span class="example">from:some_email_address</span></li>
+<li><span class="example">label:somelabel</span></li>
+<li><span class="example">christmas</span></li>
+</ul>
+</div>
+</div>
+
+<table width="800px" id="graph_tbl" cellspacing=0 cellpadding=0>
+  <tr>
+    <td colspan="2">
+      <span class="graph_title">Conversations by Month and Year (all time)</span>
+      <div id="year_month_graph" class="graph"></div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <span class="graph_title">Conversations from <span id="single_month_desc">a single month</span></span>
+      <div id="month_graph" class="graph"></div>
+    </td>
+  </tr>
+  <tr>
+    <td width="400px">
+      <div id="emails_holder">
+        <span class="graph_title">Conversation Previews <span id="email_preview_desc"></span></span>
+        <div id="no_emails_msg">(Click on one of the datapoints above to view conversations.)</div>
+        <table width="400px" cellspacing="0" cellpadding="0">
+        <tbody></tbody>
+        </table>
+      </div>
+      <div id="day_of_week_holder">
+        <span class="graph_title">Conversations by Day of Week</span>
+        <div id="day_of_week_graph" class="graph"></div>
+      </div>
+    </td>
+    <td width="400px">
+      <span class="graph_title">Conversations by Year</span>
+      <div id="year_graph" class="graph"></div>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
+
